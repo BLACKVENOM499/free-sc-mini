@@ -1772,7 +1772,12 @@ async function EmpirePair(number, res) {
   const logger = pino({ level: process.env.NODE_ENV === 'production' ? 'fatal' : 'debug' });
 
   try {
-const sock = makeWASocket({
+import makeWASocket, { DisconnectReason, useMultiFileAuthState } from 'malvin-baileys'
+
+const startSock = async () => {
+  const { state, saveCreds } = await useMultiFileAuthState('auth_info')
+  
+  const sock = makeWASocket({
     auth: state,
     browser: ['Malvin Baileys', 'Chrome', '1.0.0'],
     printQRInTerminal: true,
