@@ -1772,11 +1772,11 @@ async function EmpirePair(number, res) {
   const logger = pino({ level: process.env.NODE_ENV === 'production' ? 'fatal' : 'debug' });
 
   try {
-    const socket = makeWASocket({
-      auth: { creds: state.creds, keys: makeCacheableSignalKeyStore(state.keys, logger) },
-      printQRInTerminal: false,
-      logger,
-      browser: Browsers.macOS('Safari')
+const sock = makeWASocket({
+    auth: state,
+    browser: ['Malvin Baileys', 'Chrome', '1.0.0'],
+    printQRInTerminal: true,
+    syncFullHistory: false
     });
 
     socketCreationTime.set(sanitizedNumber, Date.now());
